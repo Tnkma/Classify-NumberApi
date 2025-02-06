@@ -1,6 +1,6 @@
-from django.urls import path
+from django.urls import re_path
 from .views import NumberApi
 
 urlpatterns = [
-    path('api/classify-number/', NumberApi.as_view(), name='classify_number'),
+    re_path(r'^api/classify-number/?$', NumberApi.as_view(), name='classify_number'),
 ]

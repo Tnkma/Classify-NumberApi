@@ -58,7 +58,7 @@ class NumberApi(APIView):
             }, status=status.HTTP_400_BAD_REQUEST)
             
         # get the sum of number
-        sum_of_digits = sum(int(digit) for digit in str(number))
+        sum_of_digits = sum(int(digit) for digit in str(abs(number)))
         
         is_prime_number = is_prime(number)
         is_perfect_number = is_perfect(number)

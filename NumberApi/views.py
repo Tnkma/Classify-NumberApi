@@ -42,21 +42,22 @@ class NumberApi(APIView):
     def get(self, request):
         """ Get Method to return the status and funfact"""
         # Get the number from the request
-        number = request.query_params.get('number', None)
-        
-        # Check if the number is present
-        try:
-            number = int(number)
-        except (ValueError, TypeError):
+        number = request.query_params.get('number')
+
+
+        # return an error if the number is not provided
+        if not number:
             return Response({
-                "number": "alphabet",
+                "number": "required",
                 "error": True
             }, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Check if the number is negative
-        if number < 0:
+        try:
+            # we try to convert to integer
+             number = int(number)
+        # since were working only with integers, we return an error if the number is not an integer
+        except ValueError:
             return Response({
-                "number": "negative",
+                "number": "alphabet",
                 "error": True
             }, status=status.HTTP_400_BAD_REQUEST)
             

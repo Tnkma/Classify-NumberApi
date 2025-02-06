@@ -23,26 +23,30 @@ def is_prime(num):
     return True
 
 def is_perfect(num):
-    """ checks if the number is a perfect number"""
-    # return the sum of the factors of the number
-    return num == sum(i for i in range(1, num) if num % i == 0)
+    """Checks if the number is a perfect number."""
+    if num <= 1:
+        return False
+    divisors_sum = 1
+    for i in range(2, int(math.sqrt(num)) + 1):
+        if num % i == 0:
+            divisors_sum += i
+            if i != num // i:
+                divisors_sum += num // i
+    return divisors_sum == num
+
 
 def is_armstrong(num):
-    """ checks if the number is an armstrong number"""
-    # make a list of the digits of the number
+    """Checks if the number is an Armstrong number."""
     digits = [int(digit) for digit in str(num)]
-    # calaculate the power of the num based on the digits
     power = len(digits)
-    # raise each digit to the power and sum them
-    # if the sum is equal to the number, then it is an armstrong number
-    return num == sum(digit ** power for digit in digits) == num
+    return num == sum(digit ** power for digit in digits)
 
 class NumberApi(APIView):
     """ APiView"""
     def get(self, request):
         """ Get Method to return the status and funfact"""
         # Get the number from the request
-        number = request.query_params.get('number')
+        num = request.query_params.get('number')
 
 
         # return an error if the number is not provided
@@ -53,7 +57,7 @@ class NumberApi(APIView):
             }, status=status.HTTP_400_BAD_REQUEST)
         try:
             # we try to convert to integer
-             number = int(number)
+             number = int(num)
         # since were working only with integers, we return an error if the number is not an integer
         except ValueError:
             return Response({

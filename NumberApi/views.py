@@ -86,7 +86,7 @@ class NumberApi(APIView):
             "is_prime": is_prime_number,
             "is_perfect": is_perfect_number,
             "properties": properties,
-            "sum_of_digits": sum_of_digits,
+            "digit_sum": sum_of_digits,
             "fun_fact": fun_fact,
         }
         # return the data

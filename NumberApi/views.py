@@ -47,14 +47,6 @@ class NumberApi(APIView):
         """ Get Method to return the status and funfact"""
         # Get the number from the request
         num = request.query_params.get('number')
-
-
-        # return an error if the number is not provided
-        if not num:
-            return Response({
-                "number": "required",
-                "error": True
-            }, status=status.HTTP_400_BAD_REQUEST)
         try:
             # we try to convert to integer
              number = int(num)

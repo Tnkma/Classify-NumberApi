@@ -50,7 +50,7 @@ class NumberApi(APIView):
 
 
         # return an error if the number is not provided
-        if not number:
+        if not num:
             return Response({
                 "number": "required",
                 "error": True

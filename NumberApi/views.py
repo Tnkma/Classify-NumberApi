@@ -37,7 +37,7 @@ def is_perfect(num):
 
 def is_armstrong(num):
     """Checks if the number is an Armstrong number."""
-    digits = [int(digit) for digit in str(num)]
+    digits = [int(digit) for digit in str(abs(num))]
     power = len(digits)
     return num == sum(digit ** power for digit in digits)
 

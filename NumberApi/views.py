@@ -3,16 +3,21 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 import requests
+import math
 
 
 
 def is_prime(num):
     """ check if number is prime"""
     # numbers less than 2 are not prime
-    if num < 2:
+    if num <= 1:
+        return False
+    if num == 2:
+        return True
+    if num % 2 == 0:
         return False
     # for i in range of 2 to the square root of the number
-    for i in range(2, int(num ** 0.5) + 1):
+    for i in range(3, int(math.sqrt(num)) + 1, 2):
         if num % i == 0:
             return False
     return True
